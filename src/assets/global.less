@@ -1,0 +1,48 @@
+/** 1、展示代码，使用的字体 */
+.code-font {
+  tab-size: 2;
+  font-size: 17px;
+  font-family: Consolas, 'Courier New', monospace;
+}
+
+/** 代码高亮的 pre */
+.highlight-pre {
+  pre {
+    margin: 0;
+  
+    .hljs {
+      padding: 0;
+      background-color: transparent;
+  
+      .code-font();
+    }
+  }
+}
+
+/** 2、自定义滚动条 */
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    width : 8px;  /* 纵向滚动条的宽度 */
+    height: 8px;  /* 横向滚动条的高度 */
+    display: none;
+    transition: 1s;
+  }
+
+  /* 滚动条的滑块 (可拖拽部分) */
+  &::-webkit-scrollbar-thumb {
+    background: rgba(144, 147, 153, .4);
+    border-radius: 4px;
+  }
+
+  /* 滚动条的轨道 */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* 鼠标移入，才显示滚动条 */
+  &:hover::-webkit-scrollbar {
+    display: block;
+  }
+}
+
+
