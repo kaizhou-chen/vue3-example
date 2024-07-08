@@ -130,7 +130,9 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 // 从配置文件里获取项目的 base
-const base = import.meta.env.VITE_BASE_PATH
+const base = import.meta.env.VITE_BASE_PATH;
+
+console.log('base', base)
 
 /**
  * 创建路由
