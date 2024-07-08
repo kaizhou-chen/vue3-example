@@ -1,0 +1,1 @@
+import{_ as o}from"./BasicForm.vuevuetypescriptsetuptruelang-BHBYlfSg.js";import"./bus-CdlF-dbX.js";import"./marketingApi-SjjHtNYj.js";import"./index-CIcVr1hx.js";import"./apiFactory-ClI1cCsn.js";import"./main-D6F_koxo.js";export{o as default};
