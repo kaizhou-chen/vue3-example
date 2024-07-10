@@ -1,0 +1,1 @@
+import{ac as i}from"./index-Dtstn163.js";const b=new WeakMap,s=new ResizeObserver(e=>{for(const o of e){const n=o.target,t=b.get(n);if(t){const r=o.borderBoxSize[0],c={width:r.inlineSize,height:r.blockSize};t(c)}}}),d={beforeMount(e,o){s.observe(e,{box:"border-box"});const n=i(o.value,200);b.set(e,n)},unmounted(e){s.unobserve(e)}};export{d as v};
