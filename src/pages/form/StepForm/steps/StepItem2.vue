@@ -27,8 +27,8 @@ const loading = ref(false)
 const options: any = ref()
 
 const list1 = [
-  { 'label': 'cwx506023 张三 （集成服务部）', value: 'cwx506023' },
-  { 'label': 'cwx506024 李四 （集成服务部）', value: 'cwx506024' },
+  { 'label': 'abc123456 张三 （部门一）', value: 'abc123456' },
+  { 'label': 'abc345678 李四 （部门二）', value: 'abc345678' },
 ]
 
 const list2 = [
@@ -149,7 +149,7 @@ defineExpose({
 
         <template #default>
           <ul style="padding-inline-start: 20px;">
-            <li>输入工号，比如：cwx506023</li>
+            <li>输入工号，比如：abc123456</li>
             <li>如果能精确匹配，即只有一个选项，则默认选中</li>
           </ul>
         </template>

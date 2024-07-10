@@ -58,6 +58,10 @@ async function submit() {
     })
     return;
   }
+
+  ElNotification.success({
+    message: '操作成功！'
+  })
 }
 </script>
 
