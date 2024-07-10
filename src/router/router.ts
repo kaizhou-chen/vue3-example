@@ -1,5 +1,5 @@
 import type { RouteRecordRaw } from 'vue-router';
-import { createWebHistory, createRouter } from "vue-router";
+import { createWebHashHistory, createRouter } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -159,7 +159,7 @@ const base = import.meta.env.VITE_BASE_PATH;
  * 创建路由
  */
 const router = createRouter({
-  history: createWebHistory(base), // 路由类型
+  history: createWebHashHistory(base), // 路由类型
   routes
 })
 

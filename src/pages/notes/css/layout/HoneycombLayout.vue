@@ -3,29 +3,31 @@ import KeyPoint from '@/pages/notes/KeyPoint.vue'
 </script>
 
 <template>
-  <KeyPoint :notes="[{
-    code: 'clip-path',
-    desc: '使用 clip-path 裁剪出六边形',
-    lang: 'css'
-  }]"></KeyPoint>
+  <div style="overflow: hidden;">
+    <KeyPoint :notes="[{
+      code: 'clip-path',
+      desc: '使用 clip-path 裁剪出六边形',
+      lang: 'css'
+    }]"></KeyPoint>
 
-  <div class="container">
-    <div v-for="(item, rowIndex) in 5" class="row">
-      <div v-for="(item, index) in 10" class="item" :class="['item_' + rowIndex + '-' + index]">
-        <div class="path"></div>
+    <div class="container">
+      <div v-for="(item, rowIndex) in 5" class="row">
+        <div v-for="(item, index) in 10" class="item" :class="['item_' + rowIndex + '-' + index]">
+          <div class="path"></div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <ul>
-    参考文档
-    <li>
-      <el-link href="https://www.bilibili.com/video/BV1qt42177SZ/" target="_blank">https://www.bilibili.com/video/BV1qt42177SZ/</el-link>
-    </li>
-    <li>
-      <el-link href="https://tools.jb51.net/code/css3path" target="_blank">clip path 生成工具</el-link>
-    </li>
-  </ul>
+    <ul>
+      参考文档
+      <li>
+        <el-link href="https://www.bilibili.com/video/BV1qt42177SZ/" target="_blank">https://www.bilibili.com/video/BV1qt42177SZ/</el-link>
+      </li>
+      <li>
+        <el-link href="https://tools.jb51.net/code/css3path" target="_blank">clip path 生成工具</el-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style lang="less" scoped>
