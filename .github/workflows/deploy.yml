@@ -3,10 +3,10 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main # 这段是在推送到 main 分支时触发该命令
+      - main # 推送到 main 分支时触发该命令
 
 permissions:
-  contents: write #直接授权，不配置 GITHUB_TOKEN
+  contents: write # 直接授权，不配置 GITHUB_TOKEN
 
 jobs:
   build-and-deploy:
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          ref: main # 这一步检查 main 代码
+          ref: main # 拉取 main 分支代码
 
       - name: Setup Node.js and npm
         uses: actions/setup-node@v3
@@ -27,7 +27,7 @@ jobs:
         run: npm install # 使用 npm 安装依赖
 
       - name: Build
-        run: npm run build:github # 这里是执行打包命令
+        run: npm run build:github # 执行打包命令
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4

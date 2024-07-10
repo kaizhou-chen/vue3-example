@@ -2,9 +2,13 @@
 import LayoutMenu from './LayoutMenu.vue';
 import LayoutBreadcrumb from './LayoutBreadcrumb.vue';
 
-const collapse = ref(false)
 const route = useRoute()
+
+const collapse = ref(false)
 const wrap = ref('div');
+const font = reactive({
+  color: 'rgba(0, 0, 0, .15)',
+})
 
 const display = computed(() => {
   return (wrap.value === 'div') ? 'inline' : 'block'
@@ -43,6 +47,10 @@ watch(
             <layout-breadcrumb></layout-breadcrumb>
           </el-header>
         </el-container>
+
+        <div style="align-self: center;">
+          <el-link href="https://kaizhou-chen.github.io/docsify-blog/" target="_blankS">我的博客</el-link>
+        </div>
       </div>
     </el-header>
 
