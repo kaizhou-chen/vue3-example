@@ -31,7 +31,9 @@ const caseSensitive = computed(() => {
   return flags.value !== 'i'
 })
 
-const searchWords: any = computed(() => {
+const searchWords = computed<string[]>(() => {
+  let list: string[] = []
+
   let text = ''
   try {
     const regex = new RegExp(code.value, 'g' + (flags.value ? 'i' : ''));
@@ -44,14 +46,16 @@ const searchWords: any = computed(() => {
       highlight('')
     }
     
-    return [code.value]
+    list = [code.value]
   } catch(e) {
     if (highlight) {
       highlight('');
     }
 
-    return ['']
+    list = ['']
   }
+
+  return list;
 })
 
 let highlight: any;
