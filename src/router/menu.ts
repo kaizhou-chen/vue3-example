@@ -40,23 +40,26 @@ const menuList = [
   },
 
   {
-    text: '详情页',
+    text: '笔记',
     icon: 'Document',
     children: [
       {
-        text: '树形控件',
-        url: '/detail/tree',
+        text: 'CSS 笔记',
+        url: '/notes/css',
       },
       {
-        text: '右键菜单',
-        url: '/detail/context-menu',
-      },
-      /*
-      {
-        text: '虚拟滚动',
-        url: '/detail/virtual-scroller',
-      },
-      */
+        text: '小工具',
+        children: [
+          {
+            text: 'JSON 格式化',
+            url: '/notes/json-format'
+          },
+          {
+            text: '正则表达式 预览',
+            url: '/notes/regex-preview'
+          },
+        ]
+      }
     ]
   },
 ]

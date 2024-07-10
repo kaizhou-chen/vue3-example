@@ -106,6 +106,29 @@ const routes: Array<RouteRecordRaw> = [
           },
         ]
       },
+
+      /** 笔记 */
+      {
+        path: 'notes',
+        meta: { title: '笔记' },
+        children: [
+          {
+            path: 'json-format',
+            component: () => import('@/pages/notes/tools/JsonFormat.vue'),
+            meta: { title: 'JSON 格式化' }
+          },
+          {
+            path: 'regex-preview',
+            component: () => import('@/pages/notes/tools/RegexPreview.vue'),
+            meta: { title: '正则表达式 预览' }
+          },
+          {
+            path: 'css',
+            component: () => import('@/pages/notes/CssCookbook.vue'),
+            meta: { title: 'CSS 笔记', plain: true },
+          },
+        ]
+      },
     ]
   },
   
