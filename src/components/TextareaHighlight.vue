@@ -3,7 +3,7 @@ import Highlighter from 'vue-highlight-words'
 
 const model = defineModel({ default: '' })
 const props = defineProps<{
-  searchWords?: string[],
+  searchWords?: string[] | undefined,
   placeholder?: string,
   rows?: number
 }>()
