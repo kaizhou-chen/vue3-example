@@ -20,8 +20,18 @@ const menu = ref<Array<MenuItem>>([
         value: 'Vortex'
       },
     ]
-  }
+  },
 ])
+
+onMounted(() => {
+  const basePath = import.meta.env.VITE_BASE_PATH;
+  if (basePath === '/') {
+    menu.value.push({
+      label: '自学课程',
+      value: 'SelfStudy'
+    })
+  }
+})
 </script>
 
 <style lang="less" scoped>
