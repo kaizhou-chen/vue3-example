@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import QuestionLayout from '@/pages/notes/layout/QuestionLayout.vue'
+import QuestionLayout from '@/pages/notes/components/QuestionLayout.vue'
 import KeyPoint from '@/pages/notes/KeyPoint.vue'
 import vCodeHighlight from '@/directives/VCodeHighlight';
 
