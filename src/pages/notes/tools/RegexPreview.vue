@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import vCodeHighlight from '@/directives/VCodeHighlight';
-import TextareaHighlight from '@/components/TextareaHighlight.vue' 
+import TextareaHighlight from '@/pages/notes/components/TextareaHighlight.vue' 
 
 import { repeat, meta, group, lookahead } from './regexSyntax'
 
