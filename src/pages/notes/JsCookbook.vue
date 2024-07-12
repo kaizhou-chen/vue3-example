@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import CookbookLayout from '@/pages/notes/components/CookbookLayout.vue'
+import { addMenuItem } from '@/utils/menuUtil'
 import MenuItem from './MenuItem'
 
 const menu = ref<Array<MenuItem>>([
@@ -24,13 +25,7 @@ const menu = ref<Array<MenuItem>>([
 ])
 
 onMounted(() => {
-  const basePath = import.meta.env.VITE_BASE_PATH;
-  if (basePath === '/') {
-    menu.value.push({
-      label: '自学课程',
-      value: 'SelfStudy'
-    })
-  }
+  addMenuItem(menu.value, 'js-cookbook')
 })
 </script>
 

@@ -119,6 +119,17 @@ function removeTab(targetName) {
   activeTab.value = activeName
   editableTabs.value = tabs.filter((tab) => tab.name !== targetName)
 }
+
+function setActiveNode(key) {
+  treeRef.value?.setCurrentKey(key)
+}
+
+/**
+ * 向外暴露方法
+ */
+defineExpose({
+  setActiveNode
+})
 </script>
 
 <template>

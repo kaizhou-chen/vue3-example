@@ -8,6 +8,7 @@ const props = withDefaults(defineProps<{
 })
 
 const slots = useSlots()
+const layoutRef = ref()
 const activeNode = ref()
 
 const componentName = computed(() => {
@@ -55,10 +56,19 @@ function selectNode(data, node) {
 
   return true;
 }
+
+const route = useRoute()
+onMounted(() => {
+  console.log('route', route)
+  const { q } = route.query;
+  if (q) {
+    layoutRef.value?.setActiveNode(q);
+  }
+})
 </script>
 
 <template>
-  <TreeLayout
+  <TreeLayout ref="layoutRef"
     :menu="menu"
     :show-tooltip="true"
     :select-node="selectNode"

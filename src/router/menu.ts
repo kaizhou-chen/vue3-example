@@ -1,3 +1,5 @@
+import { addMenuItem } from '../utils/menuUtil'
+
 const menuList = [
   {
     text: 'Dashboard',
@@ -44,10 +46,6 @@ const menuList = [
     icon: 'Document',
     children: [
       {
-        text: 'JavaScript 笔记',
-        url: '/notes/js',
-      },
-      {
         text: 'CSS 笔记',
         url: '/notes/css',
       },
@@ -67,5 +65,7 @@ const menuList = [
     ]
   },
 ]
+
+addMenuItem(menuList, 'menu');
 
 export default menuList
