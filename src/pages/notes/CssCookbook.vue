@@ -1,10 +1,32 @@
 <template>
-  <CookbookLayout :menu="menu"></CookbookLayout>
+  <CookbookLayout :menu="menu">
+    <div>
+      <h3>CSS 笔记</h3>
+      <el-table border :data="tableData" style="width: 100%">
+        <el-table-column prop="layout" label="布局" width="180" />
+        <el-table-column prop="animation" label="动画" width="180" />
+        <el-table-column prop="other" label="其他" />
+      </el-table>
+    </div>
+  </CookbookLayout>
 </template>
 
 <script setup lang="ts">
-import CookbookLayout from '@/pages/notes/layout/CookbookLayout.vue'
+import CookbookLayout from '@/pages/notes/components/CookbookLayout.vue'
 import MenuItem from './MenuItem'
+
+const tableData = ref([
+  {
+    layout: '弹性布局 flex',
+    animation: '过渡动画 transition',
+    other: '权重 specificity'
+  },
+  {
+    layout: '网格布局 grid',
+    animation: '关键帧 @keyframes',
+    other: '变形 transform'
+  }
+])
 
 const menu = ref<Array<MenuItem>>([
   {
@@ -74,7 +96,7 @@ const menu = ref<Array<MenuItem>>([
     value: 'other',
     children: [
       {
-        label: 'CSS 变量 - 主题切换',
+        label: 'CSS 变量',
         value: 'ThemeWithVar'
       },
       {

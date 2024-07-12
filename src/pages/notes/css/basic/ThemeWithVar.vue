@@ -37,18 +37,34 @@ function handleChange(value) {
 </script>
 
 <template>
-  <KeyPoint title="定义变量" :notes="[{
-    code: `/** --变量名 */
+  <div style="display: grid; grid-gap: 12px; grid-template-columns: repeat(2, 1fr);">
+    <div>
+      <KeyPoint title="定义变量" :notes="[{
+        code: `/** --变量名 */
 --text-color: #fff;`,
-    desc: 'CSS 变量是可以继承的，把变量定义在 :root 或 html 上，则页面内所有的元素都可以使用这些变量',
-    lang: 'css'
-  }]"></KeyPoint>
+        desc: '',
+        lang: 'css'
+      }]"></KeyPoint>
 
-  <KeyPoint title="使用变量" :notes="[{
-    code: `/** 使用 var 函数 */
+      <KeyPoint title="使用变量" :notes="[{
+        code: `/** 使用 var 函数 */
 color: var(--text-color);`,
-    desc: ''
-  }]"></KeyPoint>
+        desc: ''
+      }]"></KeyPoint>
+    </div>
+
+    <div>
+      <KeyPoint title=" " :notes="[{
+        code: '',
+        desc: `<b>主题切换</b>，可以通过CSS 变量来实现
+CSS 变量可以继承，把变量定义在 <b>:root</b> 或 html 上，则页面内所有的元素都可以使用这些变量
+
+在 js 里定义 CSS 变量
+<b>div.style.setProperty('--text-color', '#fff');</b>
+`
+      }]"></KeyPoint>
+    </div>
+  </div>
 
   <div style="margin-top: 20px;">
     <el-segmented v-model="theme" :options="options" @change="handleChange">

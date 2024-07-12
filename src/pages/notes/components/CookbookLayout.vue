@@ -7,19 +7,8 @@ const props = withDefaults(defineProps<{
   menu: [] as any
 })
 
-const tableData = ref([
-  {
-    layout: '弹性布局 flex',
-    animation: '过渡动画 transition',
-    other: '权重 specificity'
-  },
-  {
-    layout: '网格布局 grid',
-    animation: '关键帧 @keyframes',
-    other: '变形 transform'
-  }
-])
-
+const slots = useSlots()
+const layoutRef = ref()
 const activeNode = ref()
 
 const componentName = computed(() => {
@@ -67,10 +56,19 @@ function selectNode(data, node) {
 
   return true;
 }
+
+const route = useRoute()
+onMounted(() => {
+  console.log('route', route)
+  const { q } = route.query;
+  if (q) {
+    layoutRef.value?.setActiveNode(q);
+  }
+})
 </script>
 
 <template>
-  <TreeLayout
+  <TreeLayout ref="layoutRef"
     :menu="menu"
     :show-tooltip="true"
     :select-node="selectNode"
@@ -99,15 +97,7 @@ function selectNode(data, node) {
 
     <!-- tab 里展示的组件-->
     <div>
-      <component v-if="componentName" :is="componentName"></component>
-      <div v-else>
-        <h3>CSS 笔记</h3>
-        <el-table border :data="tableData" style="width: 100%">
-          <el-table-column prop="layout" label="布局" width="180" />
-          <el-table-column prop="animation" label="动画" width="180" />
-          <el-table-column prop="other" label="其他" />
-        </el-table>
-      </div>
+      <component :is="componentName"></component>
     </div>
   </TreeLayout>
 </template>

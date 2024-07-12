@@ -1,3 +1,5 @@
+import { addMenuItem } from '../utils/menuUtil'
+
 const menuList = [
   {
     text: 'Dashboard',
@@ -63,5 +65,7 @@ const menuList = [
     ]
   },
 ]
+
+addMenuItem(menuList, 'menu');
 
 export default menuList
