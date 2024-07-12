@@ -1,0 +1,8 @@
+import r from"./KeyPoint-601k8t0w.js";import{d as p,r as m,c as v,$ as f,a as h,o as g,I as b,X as e,e as a,w as x,Y as i,u as l,l as y,L as C}from"./index-D6tOstyB.js";import{_ as S}from"./plugin-vueexport-helper-DlAUqK2U.js";import"./VCodeHighlight-DO0YDudZ.js";const V={style:{display:"grid","grid-gap":"12px","grid-template-columns":"repeat(2, 1fr)"}},k={style:{"margin-top":"20px"}},B={class:"container"},N={class:"bg1"},w={class:"text"},I={class:"bg2"},P={class:"text"},T=p({__name:"ThemeWithVar",setup(W){const o=m(),n=m([{label:"浅色主题",value:"light"},{label:"深色主题",value:"dark"}]),c=v(()=>{const s=n.value.find(t=>t.value===o.value);return s?s.label:""});f(()=>{o.value=n.value[0].value});function u(s){const t=document.querySelector("html");s==="dark"?t.dataset.theme="dark":delete t.dataset.theme}return(s,t)=>{const _=h("el-segmented");return g(),b(C,null,[e("div",V,[e("div",null,[a(r,{title:"定义变量",notes:[{code:`/** --变量名 */
+--text-color: #fff;`,desc:"",lang:"css"}]}),a(r,{title:"使用变量",notes:[{code:`/** 使用 var 函数 */
+color: var(--text-color);`,desc:""}]})]),e("div",null,[a(r,{title:" ",notes:[{code:"",desc:`<b>主题切换</b>，可以通过CSS 变量来实现
+CSS 变量可以继承，把变量定义在 <b>:root</b> 或 html 上，则页面内所有的元素都可以使用这些变量
+
+在 js 里定义 CSS 变量
+<b>div.style.setProperty('--text-color', '#fff');</b>
+`}]})])]),e("div",k,[a(_,{modelValue:l(o),"onUpdate:modelValue":t[0]||(t[0]=d=>y(o)?o.value=d:null),options:l(n),onChange:u},{default:x(({item:d})=>[e("div",null,i(d.label),1)]),_:1},8,["modelValue","options"])]),e("div",B,[e("div",N,[e("div",w,i(l(c)),1)]),e("div",I,[e("div",P,i(l(c)),1)])])],64)}}}),F=S(T,[["__scopeId","data-v-220df572"]]);export{F as default};
