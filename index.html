@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>self["MonacoEnvironment"] = (function (paths) {
+          return {
+            globalAPI: false,
+            getWorkerUrl : function (moduleId, label) {
+              var result =  paths[label];
+              if (/^((http:)|(https:)|(file:)|(\/\/))/.test(result)) {
+                var currentUrl = String(window.location);
+                var currentOrigin = currentUrl.substr(0, currentUrl.length - window.location.hash.length - window.location.search.length - window.location.pathname.length);
+                if (result.substring(0, currentOrigin.length) !== currentOrigin) {
+                  var js = '/*' + label + '*/importScripts("' + result + '");';
+                  var blob = new Blob([js], { type: 'application/javascript' });
+                  return URL.createObjectURL(blob);
+                }
+              }
+              return result;
+            }
+          };
+        })({
+  "editorWorkerService": "/vue3-example/monacoeditorwork/editor.worker.bundle.js",
+  "typescript": "/vue3-example/monacoeditorwork/ts.worker.bundle.js",
+  "json": "/vue3-example/monacoeditorwork/json.worker.bundle.js",
+  "html": "/vue3-example/monacoeditorwork/html.worker.bundle.js",
+  "javascript": "/vue3-example/monacoeditorwork/ts.worker.bundle.js",
+  "handlebars": "/vue3-example/monacoeditorwork/html.worker.bundle.js",
+  "razor": "/vue3-example/monacoeditorwork/html.worker.bundle.js"
+});</script>
+
     <meta charset="UTF-8">
     <link rel="icon" href="/vue3-example/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vue 3 Example</title>
-    <script type="module" crossorigin src="/vue3-example/assets/main-l67QORG4.js"></script>
+    <script type="module" crossorigin src="/vue3-example/assets/main-DmfLwbbU.js"></script>
     <link rel="modulepreload" crossorigin href="/vue3-example/assets/index-DUm034Nc.js">
     <link rel="stylesheet" crossorigin href="/vue3-example/assets/index-D8KbGgDy.css">
     <link rel="stylesheet" crossorigin href="/vue3-example/assets/main-DtIzVXre.css">
