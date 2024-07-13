@@ -17,9 +17,17 @@ export function addMenuItem(menu: any[], type: 'menu' | 'js-cookbook') {
 
   // 本地环境，在JavaScript笔记里添加 自学课程
   if (type === 'js-cookbook') {
-    menu.push({
-      label: '自学课程',
-      value: 'SelfStudy'
-    })
+    const study = [
+      {
+        label: '自学课程',
+        value: 'SelfStudy'
+      },
+      {
+        label: '俄罗斯方块',
+        value: 'Tetris'
+      },
+    ];
+
+    menu.splice(menu.length, 0, ...study);
   }
 }

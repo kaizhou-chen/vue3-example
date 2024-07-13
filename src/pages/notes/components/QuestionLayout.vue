@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import TextareaEditor from '@/pages/notes/components/TextareaEditor.vue'
+import { isArray } from 'lodash-es'
 
 const props = withDefaults(defineProps<{
   question?: string,
   answer?: string,
 
-  runImmediate?: boolean,
   showResult?: boolean,
 }>(), {
   question: '',
@@ -16,8 +16,9 @@ const emit = defineEmits<{
   change: [any]
 }>()
 
-const code = defineModel()
-const resultList = ref([])
+const code = ref('')
+const result = ref('')
+const logList = ref([])
 
 let worker: Worker;
 let blobURL: string;
@@ -26,20 +27,30 @@ onMounted(() => {
   if (props.answer) {
     code.value = props.answer
   }
-
-  if (props.runImmediate) {
-    run();
-  }
 })
+
+watch(
+  () => props.answer,
+  (val) => {
+    code.value = val || ''
+  }
+)
 
 function run() {
   const worker = inlineWorker();
 
   worker.postMessage(['run']);
   worker.onmessage = (e) => {
-    resultList.value = e.data;
+    result.value = e.data.result;
+    logList.value = e.data.logList.map(x => {
+      if (isArray(x)) {
+        return x.join(' , ')
+      }
 
-    emit('change', e.data[0])
+      return x;
+    });
+    
+    emit('change', e.data.result)
   }
 }
 
@@ -60,6 +71,7 @@ function inlineWorker() {
 function getWorkerScript() {
   const script = `// 收到消息
 self.onmessage = async (e) => {
+  let result = '';
   const logList = []
   const oldLog = console.log;
 
@@ -76,10 +88,8 @@ self.onmessage = async (e) => {
 
   // 执行代码
   const executor = async () => {
-    const result = ${props.question ? props.question : '"";'}
-    console.log(result)
-
-    ${code.value}
+    ${ getQuestionCode() }
+    ${ code.value }
   }
   await executor();
 
@@ -88,10 +98,33 @@ self.onmessage = async (e) => {
     console.log = oldLog
 
     // 发送消息，将打印结果传递回去
-    self.postMessage(logList)
+    self.postMessage({result, logList})
   }, 500)
 }`
   return script
+}
+
+// 调用函数的代码，必须写在最后一行
+function getQuestionCode() {
+  if (!props.question) {
+    return ''
+  }
+
+  const lines = props.question.split('\n')
+  if (lines.length === 1) {
+    return 'result = ' + props.question
+  } else {
+    const len = lines.length - 1
+    const list = lines.map((x, index) => {
+      if (index < len) {
+        return x
+      } else {
+        return 'result = ' + x
+      }
+    })
+
+    return list.join('\n')
+  }
 }
 </script>
 
@@ -100,12 +133,19 @@ self.onmessage = async (e) => {
     <div>
       <slot></slot>
 
-      <div v-if="showResult && resultList.length > 0">
+      <div v-if="showResult && (result !== '' || logList.length > 0)">
         <el-divider />
         <el-card>
-          <div style="line-height: 32px;">运行结果：</div>
-          <div class="result">
-            <div v-for="item of resultList">{{ item }}</div>
+          <div v-if="result !== ''">
+            <div style="line-height: 32px;">运行结果：</div>
+            <div>{{ result }}</div>
+          </div>
+
+          <div v-if="logList.length > 0">
+            <el-divider />
+            <div class="result">
+              <div v-for="item of logList">{{ item }}</div>
+            </div>
           </div>
         </el-card>
       </div>

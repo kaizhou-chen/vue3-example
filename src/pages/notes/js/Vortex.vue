@@ -1,12 +1,21 @@
 <template>
-  <QuestionLayout :question="question" :answer="answer" :run-immediate="true" :show-result="false" @change="handleChange">
+  <QuestionLayout :question="question" :answer="answer" :show-result="false" @change="handleChange">
     <div style="min-height: 32px; margin-bottom: 12px;">
       创建一个 n 行 m 列的漩涡型数组
     </div>
     <TextareaEditor v-model="question" :rows="1"></TextareaEditor>
 
-    <el-divider v-if="list.length > 0" />
+    <el-divider />
+    <ul>
+      解题思路
+      <li>创建 n * m 的二维数组，用 0 填充</li>
+      <li>开始一个无限循环，每次移动一格</li>
+      <li>如果下一格的值是 0，则 count++ ，并赋值</li>
+      <li>如果下一格的值不是 0，则调整移动方向</li>
+      <li>如果每一格都不是 0，则结束循环</li>
+    </ul>
 
+    <el-divider v-if="list.length > 0" />
     <div v-if="list.length <= 10" ref="divRef">
       <div v-for="row of list" class="row">
         <div v-for="item of row" 
@@ -16,7 +25,6 @@
         </div>
       </div>
     </div>
-
     <div v-else>{{ list }}</div>
   </QuestionLayout>
 </template>
@@ -24,6 +32,9 @@
 <script setup lang="ts">
 import QuestionLayout from '@/pages/notes/components/QuestionLayout.vue'
 import TextareaEditor from '@/pages/notes/components/TextareaEditor.vue'
+
+const question = ref("vortex(4, 4);")
+const answer = ref(vortex.toString())
 
 const divRef = ref()
 const list = ref<any[]>([])
@@ -33,6 +44,11 @@ const listSize = computed(() => {
     return list.value.length * list.value[0].length
   }
   return 0;
+})
+
+onMounted(() => {
+  const data = vortex(4, 4)
+  handleChange(data)
 })
 
 function getColor(item) {
@@ -50,9 +66,7 @@ async function handleChange(data) {
   }
 }
 
-const question = ref("vortex(4, 4);")
-
-const answer = ref(`function vortex(n, m) {
+function vortex(n, m) {
   // 创建二维数组，用 0 填充
   const nums = new Array(n).fill(0).map(() => {
     return new Array(m).fill(0)
@@ -92,7 +106,7 @@ const answer = ref(`function vortex(n, m) {
   }
 
   return nums;
-}`)
+}
 </script>
 
 <style lang="less" scoped>
