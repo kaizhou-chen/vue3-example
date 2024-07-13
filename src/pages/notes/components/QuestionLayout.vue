@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import TextareaEditor from '@/pages/notes/components/TextareaEditor.vue'
 import { isArray } from 'lodash-es'
+import MonacoEditor from '@/components/MonacoEditor/MonacoEditor.vue'
 
 const props = withDefaults(defineProps<{
   question?: string,
@@ -152,12 +152,14 @@ function getQuestionCode() {
     </div>
 
     <div>
-      <div style="display: flex; margin-bottom: 12px;">
+      <div style="display: flex; margin: 0 0 12px 70px;">
         <el-button type="primary" @click="run">运行</el-button>
         <el-text type="info" style="margin-left: 8px;">代码会在 Web Worker 里运行</el-text>
       </div>
-      
-      <TextareaEditor v-model="code" class="editor"></TextareaEditor>
+
+      <div class="editor">
+        <MonacoEditor v-model="code" height="100%"></MonacoEditor>
+      </div>
     </div>
   </div>
 </template>
