@@ -91,8 +91,13 @@ const menu = ref<Array<MenuItem>>([
       },
       {
         label: '重复渐变的边框',
-        value: 'GradientBorder'
+        value: 'GradientBorder',
+        tag: '线性渐变, 径向渐变, 锥形渐变, linear-gradient'
       },
+      {
+        label: 'clip-path',
+        value: 'ClipPath'
+      }
     ]
   },
   {

@@ -4,6 +4,17 @@ import path, { resolve } from "path";
 import fs from 'fs';
 
 import AutoImport from 'unplugin-auto-import/vite'
+import monacoEditorPluginModule from 'vite-plugin-monaco-editor'
+
+const isObjectWithDefaultFunction = (module: unknown): module is { default: typeof monacoEditorPluginModule } => (
+  module != null &&
+  typeof module === 'object' &&
+  'default' in module &&
+  typeof module.default === 'function'
+)
+const monacoEditorPlugin = isObjectWithDefaultFunction(monacoEditorPluginModule)
+  ? monacoEditorPluginModule.default
+  : monacoEditorPluginModule
 
 const INVALID_CHAR_REGEX = /[\u0000-\u001F"#$&*+,:;<=>?[\]^`{|}\u007F]/g;
 const DRIVE_LETTER_REGEX = /^[a-z]:/i;
@@ -21,6 +32,11 @@ export default defineConfig(({ mode }) => {
       // 自动导入
       AutoImport({
         imports: [ 'vue', 'vue-router', 'pinia' ],
+      }),
+
+      // Monaco Editor 配置
+      monacoEditorPlugin({
+        languageWorkers: ['editorWorkerService', 'typescript', 'json', 'html']
       }),
 
       // 自定义插件
