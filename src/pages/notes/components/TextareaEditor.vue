@@ -19,6 +19,13 @@ onMounted(() => {
   handleInput();
 })
 
+watch(
+  () => model.value,
+  () => {
+    handleInput();
+  }
+)
+
 function getHighlight(fn) {
   highlight = fn;
 }
@@ -89,7 +96,7 @@ function onScroll(e) {
 /** 与 textarea 的样式保持一致 */
 .textarea-like {
   line-height: 1.5;
-  padding: 5px 15px 5px 11px;
+  padding: 5px 0px 5px 11px;
   width: calc(100% - 28px);
 
   overflow-wrap: break-word;
@@ -120,12 +127,16 @@ function onScroll(e) {
   top: 0px; 
   left: 0px; 
   height: 100%; 
+  box-sizing: border-box;
 
   z-index: 1;
   background-color: transparent;
   pointer-events: none; /** 鼠标穿透 */
 
+  :deep(code),
   :deep(span) {
+    word-break: break-all;
+    overflow-wrap: break-word;
     text-wrap: wrap !important;
   }
 }

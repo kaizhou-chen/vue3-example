@@ -88,7 +88,11 @@ const menu = ref<Array<MenuItem>>([
       {
         label: '磨砂玻璃效果',
         value: 'BackdropFilter'
-      }
+      },
+      {
+        label: '重复渐变的边框',
+        value: 'GradientBorder'
+      },
     ]
   },
   {

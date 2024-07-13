@@ -7,7 +7,6 @@ const props = withDefaults(defineProps<{
   menu: [] as any
 })
 
-const slots = useSlots()
 const layoutRef = ref()
 const activeNode = ref()
 
@@ -59,7 +58,6 @@ function selectNode(data, node) {
 
 const route = useRoute()
 onMounted(() => {
-  console.log('route', route)
   const { q } = route.query;
   if (q) {
     layoutRef.value?.setActiveNode(q);
@@ -97,7 +95,10 @@ onMounted(() => {
 
     <!-- tab 里展示的组件-->
     <div>
-      <component :is="componentName"></component>
+      <component v-if="componentName" :is="componentName"></component>
+      <div v-else>
+        <slot></slot>
+      </div>
     </div>
   </TreeLayout>
 </template>
