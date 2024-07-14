@@ -1,7 +1,7 @@
 // 项目的根路径
 const base = import.meta.env.VITE_BASE_PATH
 
-export function addMenuItem(menu: any[], type: 'menu' | 'js-cookbook') {
+export function addMenuItem(menu: any[], type: 'menu' | 'js-cookbook' | 'css-cookbook') {
   if (base !== '/') {
     return;
   }
@@ -29,5 +29,35 @@ export function addMenuItem(menu: any[], type: 'menu' | 'js-cookbook') {
     ];
 
     menu.splice(menu.length, 0, ...study);
+  }
+
+  // 本地环境，在CSS笔记里添加 其他
+  if (type === 'css-cookbook') {
+    menu.push({
+      label: '其他',
+      value: 'other',
+      children: [
+        {
+          label: 'CSS 笔记',
+          value: 'CssNote'
+        },
+        {
+          label: '相对单位 em/rem',
+          value: 'RelativeUnit'
+        },
+        {
+          label: '悬浮抽卡',
+          value: 'GachaGame'
+        },
+        {
+          label: '颜色转换',
+          value: 'ColorTools'
+        },
+        {
+          label: '文字转图片',
+          value: 'TextToImage'
+        },
+      ]
+    })
   }
 }

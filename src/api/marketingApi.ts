@@ -90,6 +90,13 @@ export function downloadFile(filename, getProgress?: (loaded: number, total) => 
       }
     },
   }).then((response) => {
+    // 下载完毕
+    if (getProgress) {
+      setTimeout(() => {
+        getProgress(100, 100)
+      }, 500)
+    }
+
     download(response.data, filename)
   })
 }

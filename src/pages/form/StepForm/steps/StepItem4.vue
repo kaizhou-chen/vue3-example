@@ -6,7 +6,7 @@ import { downloadFile } from '@/api/marketingApi'
 const { fileInfo, uploadFile } = useStep4()
 
 const fileInput = ref()
-const downloadPercentage = ref(0)
+const downloadPercentage = ref()
 
 const uploadPercentage = computed(() => {
   const { loaded, fileSize } = fileInfo.value
