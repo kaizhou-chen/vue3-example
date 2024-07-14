@@ -29,6 +29,10 @@ watch(
   },
   { immediate: true }
 )
+
+function gotoBlog() {
+  window.open('https://kaizhou-chen.github.io/docsify-blog/')
+}
 </script>
 
 <template>
@@ -49,7 +53,7 @@ watch(
         </el-container>
 
         <div style="align-self: center;">
-          <el-link href="https://kaizhou-chen.github.io/docsify-blog/" target="_blankS">我的博客</el-link>
+          <el-button type="primary" round @click="gotoBlog">我的博客</el-button>
         </div>
       </div>
     </el-header>
