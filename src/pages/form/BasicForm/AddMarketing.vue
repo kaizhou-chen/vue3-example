@@ -58,7 +58,7 @@ async function handleSubmit(data) {
 
 function close() {
   if(isBasic.value) {
-    router.push({ path: '/table/pinia' })
+    router.push('/table/pinia')
     return;
   }
 

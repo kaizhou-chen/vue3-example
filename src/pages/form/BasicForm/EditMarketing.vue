@@ -61,7 +61,6 @@ function close() {
   if(props.isDialog) {
     emits('close');
   } else {
-    // router.push({path: '/pinia/table'})
     router.back()
   }
 }

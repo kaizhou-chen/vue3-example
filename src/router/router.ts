@@ -36,14 +36,12 @@ const routes: Array<RouteRecordRaw> = [
           },
           {
             path: 'create',
-            name: 'createForm',
             component: () => import('@/pages/form/BasicForm/AddMarketing.vue'),
             props: (route) => ({ isDialog: false }),
             meta: { title: '创建活动' }
           },
           {
             path: 'update',
-            name: 'updateForm',
             component: () => import('@/pages/form/BasicForm/EditMarketing.vue'),
             props: (route) => ({ isDialog: false }),
             meta: { title: '修改活动' }
@@ -85,7 +83,8 @@ const routes: Array<RouteRecordRaw> = [
         meta: { title: '详情页' },
         children: [
           {
-            path: 'basic',
+            path: ':id/basic', // 占位符 :id
+            name: 'basicDetail',
             component: () => import('@/pages/detail/BasicDetail.vue'),
             meta: { title: '基础详情' }
           },

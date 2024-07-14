@@ -47,7 +47,12 @@ export function useDialog() {
   function viewDetail(data) {
     const val = JSON.parse(JSON.stringify(data));
 
-    router.push({ path: '/detail/basic' }).then(() => {
+    router.push({ 
+      name: 'basicDetail', 
+      params: {
+        id: data.id
+      } 
+    }).then(() => {
       bus.emit('viewUser', val) // 路由不能传递对象，使用EventBus，在页面跳转后发送消息
     })
   }
