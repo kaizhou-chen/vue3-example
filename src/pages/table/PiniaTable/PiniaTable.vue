@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { formatDate } from '@/utils/dateUtils'
 
-import BasicForm from '@/pages/form/BasicForm/BasicForm.vue'
+import AddMarketing from '@/pages/form/BasicForm/AddMarketing.vue'
+import EditMarketing from '@/pages/form/BasicForm/EditMarketing.vue'
 import AutoTooltip from '@/components/AutoTooltip.vue';
 import SearchForm from './SearchForm.vue'
 import CustomFilter from './CustomFilter.vue';
@@ -272,7 +273,7 @@ function selectFirstRow() {
       :close-on-click-modal="false"
       width="50%"
     >
-      <basic-form :is-dialog="true" :is-open="dgOpen" :is-update="isUpdate" @close="close"></basic-form>
+      <component :is="isUpdate ? EditMarketing : AddMarketing" :is-dialog="true" @close="close"></component>
     </el-dialog>
   </div>
 </template>

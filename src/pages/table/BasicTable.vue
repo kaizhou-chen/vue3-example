@@ -5,7 +5,8 @@ import bus from '@/utils/bus';
 import { formatDate } from '@/utils/dateUtils'
 import { listMarketing } from '@/api/apiFactory';
 
-import BasicForm from '@/pages/form/BasicForm/BasicForm.vue'
+import AddMarketing from '@/pages/form/BasicForm/AddMarketing.vue'
+import EditMarketing from '@/pages/form/BasicForm/EditMarketing.vue'
 import BasicDetail from '@/pages/detail/BasicDetail.vue';
 import AutoTooltip from '@/components/AutoTooltip.vue'
 import MultiSelect from '@/components/MultiSelect.vue'
@@ -131,9 +132,10 @@ function resourceRender(value) {
 function gotoCreate() {
   if (dgType.value === 1) {
     // 跳转到创建页面
-    router.push({name: 'createForm'})
+    router.push({ path: '/form/create' })
   } else {
     // 打开创建弹出框
+    dgTitle.value = '新建活动'
     isUpdate.value = false;
     dgOpen.value = true;
   }
@@ -144,11 +146,12 @@ async function doUpdate(data) {
 
   if (dgType.value === 1) {
     // 跳转到编辑页面
-    router.push({name: 'updateForm'}).then(() => {
+    router.push({ path: '/form/update' }).then(() => {
       bus.emit('updateUser', val) // 路由不能传递对象，使用EventBus，在页面跳转后发送消息
     })
   } else {
     // 打开编辑弹出框
+    dgTitle.value = '编辑活动'
     isUpdate.value = true;
     dgOpen.value = true;
 
@@ -160,7 +163,7 @@ async function doUpdate(data) {
 function viewDetail(data) {
   const val = JSON.parse(JSON.stringify(data));
 
-  router.push({name: 'basicDetail'}).then(() => {
+  router.push({ path: '/detail/basic' }).then(() => {
     bus.emit('viewUser', val) // 路由不能传递对象，使用EventBus，在页面跳转后发送消息
   })
 }
@@ -316,7 +319,7 @@ function close() {
       :close-on-click-modal="false"
       width="50%"
     >
-      <basic-form :is-dialog="true" :is-update="isUpdate" @close="close"></basic-form>
+      <component :is="isUpdate ? EditMarketing : AddMarketing" :is-dialog="true" @close="close"></component>
     </el-dialog>
   </div>
 </template>

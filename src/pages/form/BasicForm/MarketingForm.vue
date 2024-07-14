@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import { ElNotification } from 'element-plus'
-
-import bus from '@/utils/bus';
-import { sendRequest } from '@/utils/httpUtil';
-import { createMarketing, updateMarketing } from '@/api/apiFactory';
-import { formatData, parseData } from './formatUtil';
+import { formatData } from './marketingUtil';
 
 // 自定义属性、自定义事件
-const props = defineProps({
-  isDialog: Boolean,
-  isUpdate: Boolean
-})
-const emits = defineEmits(['close'])
+const props = defineProps<{
+  data?: any,
+  cancelText?: string | null, // 页面：返回，弹出框：取消
+}>()
 
-// 使用路由
-const router = useRouter()
-const route = useRoute()
+const emit = defineEmits<{
+  submit: [any],
+  cancel: []
+}>()
 
 // 模板引用的变量
 const formRef = ref();
@@ -51,47 +46,28 @@ const rules: any = reactive({
   resource: [
     { required: true, message: '请选择活动资源', trigger: 'change' }
   ],
-  desc: [
-    { required: true, message: '请填写活动形式', trigger: 'blur' }
-  ]
 })
 
-/** 其他变量 */
-const loading = ref(false)
-const okBtn = ref('确定')
-const showBackBtn = ref(true)
-
-// 如果是编辑页面，则进行表单初始化
 onMounted(() => {
-  bus.on('updateUser', (data) => {
-    const origin = parseData(data);
-    
-    // 更新时，初始化表单数据，使用 Object.assign 赋值
-    Object.assign(form, origin);
-  })
-
-  const route = useRoute()
-  if (route.name === 'basicForm') {
-    showBackBtn.value = false
+  if (props.data) {
+    updateForm(props.data)
   }
 })
 
-onUnmounted(() => {
-  bus.off('updateUser')
-})
-
 watch(
-  () => props.isUpdate,
-  (isUpdate) => {
-    if (isUpdate) {
-      okBtn.value = '提交'
-    }
-  },
-  { immediate: true }
+  () => props.data,
+  (data) => {
+    updateForm(data)
+  }
 )
 
+function updateForm(data) {
+  // 使用 Object.assign 赋值，进行表单初始化
+  Object.assign(form, data);
+}
+
 function onCancel(formEl) {
-  goBack()
+  emit('cancel')
 }
 
 function onSubmit(formEl) {
@@ -101,51 +77,18 @@ function onSubmit(formEl) {
       return false;
     }
 
-    if (props.isUpdate) {
-      doUpdate();
-    } else {
-      doCreate();
-    }
+    const data = formatData(form);
+    emit('submit', data)
   });
 }
 
-async function doCreate() {
-  const data = formatData(form);
-  const resp = await sendRequest(createMarketing(data));
-  backToList(resp)
-}
-
-async function doUpdate() {
-  const data = formatData(form);
-  const resp = await sendRequest(updateMarketing(data));
-  backToList(resp)
-}
-
-function backToList(resp) {
-  if (resp.data.success) {
-    ElNotification.success({
-      message: '操作成功',
-    })
-    
-    goBack()
-  }
-}
-
-function goBack() {
+function reset() {
   formRef.value.resetFields();
-
-  if (route.name === 'basicForm') { 
-    router.push({name: 'basicTable'})
-    return
-  }
-
-  if(props.isDialog) {
-    emits('close');
-    return;
-  }
-  
-  router.back()
 }
+
+defineExpose({
+  reset
+})
 </script>
 
 <template>
@@ -223,8 +166,8 @@ function goBack() {
 
       <el-form-item>
         <div style="display: flex; justify-content: center; width: 100%;">
-          <el-button v-if="showBackBtn" @click="onCancel(formRef)">{{ isDialog ? "取消" : "返回" }}</el-button>
-          <el-button type="primary" @click="onSubmit(formRef)">{{ okBtn }}</el-button>
+          <el-button v-if="cancelText" @click="onCancel(formRef)">{{ cancelText }}</el-button>
+          <el-button type="primary" @click="onSubmit(formRef)">提交</el-button>
         </div>
       </el-form-item>
     </el-form>
