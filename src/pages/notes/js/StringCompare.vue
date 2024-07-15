@@ -18,7 +18,49 @@ import TextareaEditor from '@/pages/notes/components/TextareaEditor.vue'
 import HighlightCode from '@/pages/notes/components/HighlightCode.vue'
 
 const question = ref("compare('1-2-3', '1-2-4')")
-const answer = ref(compare.toString())
+const answer = ref(`function compare(s1, s2) {
+  const iter1 = walk(s1);
+  const iter2 = walk(s2);
+
+  while(1) {
+    const n1 = iter1.next();
+    const n2 = iter2.next();
+
+    // 打印每次比较的数字
+    console.log(n1.value, n2.value)
+
+    if (n1.value > n2.value) {
+      return 1
+    } else if (n1.value < n2.value) {
+      return -1
+    } else if (n1.done && n2.done) {
+      return 0
+    } else if (n1.done) {
+      return -1
+    } else if (n2.done) {
+      return 1
+    }
+  }
+
+  /**
+   * 生成器函数
+   */
+  function* walk(str) {
+    let part = '';
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] !== '-') {
+        part += str[i]
+      } else {
+        yield Number(part)
+        part = ''
+      }
+    }
+
+    if (part) {
+      yield Number(part)
+    }
+  }
+}`)
 
 const desc = ref(`/**
  * 比较两个字符串的大小

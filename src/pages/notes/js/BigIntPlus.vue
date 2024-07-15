@@ -20,7 +20,40 @@ import QuestionLayout from '@/pages/notes/components/QuestionLayout.vue'
 import TextareaEditor from '@/pages/notes/components/TextareaEditor.vue'
 
 const question = ref("sum('1234567', '3482752370238420');")
-const answer = ref(sum.toString())
+const answer = ref(`function sum(a, b) {
+  // 对齐数字
+  const len = Math.max(a.length, b.length);
+  a = a.padStart(len, '0')
+  b = b.padStart(len, '0')
+
+  // 从最后一位数开始计算
+  let carry = 0; // 进位
+  let result = [];
+  for (let i = len - 1; i >= 0; i--) {
+    // 第 i 位数相加，并加上进位
+    const total = Number(a[i]) + Number(b[i]) + carry;
+    carry = Math.floor(total / 10); // 计算进位
+
+     // 计算结果，只取个位数【去掉进位】
+    const digit = total % 10;
+    // @ts-ignore
+    result.unshift(digit) // 添加到首位，每次计算都进一位
+  }
+
+  if (carry > 0) {
+    // @ts-ignore
+    result.unshift(carry)
+  }
+
+  // 打印过程
+  const prefix = (carry > 0 ? ' ' : '')
+  const sep = new Array(len).fill('-').join('')
+  console.log(prefix + a);
+	console.log(prefix + b);
+	console.log(prefix + sep);
+
+  return result.join('')
+}`)
 
 function sum(a, b) {
   // 对齐数字
