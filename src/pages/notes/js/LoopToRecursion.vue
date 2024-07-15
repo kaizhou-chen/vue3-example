@@ -20,7 +20,13 @@ import TextareaEditor from '@/pages/notes/components/TextareaEditor.vue'
 
 const question = ref(`const arr = [1, 2, 3, 4, 5];
 sum(arr);`)
-const answer = ref(sum.toString())
+const answer = ref(`function sum(arr, i = 0) {
+  if (i === arr.length) {
+    return 0;
+  }
+
+  return arr[i] + sum(arr, i + 1)
+}`)
 
 function sum(arr, i = 0) {
   if (i === arr.length) {

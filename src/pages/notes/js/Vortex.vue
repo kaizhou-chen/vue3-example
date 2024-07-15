@@ -34,7 +34,47 @@ import QuestionLayout from '@/pages/notes/components/QuestionLayout.vue'
 import TextareaEditor from '@/pages/notes/components/TextareaEditor.vue'
 
 const question = ref("vortex(4, 4);")
-const answer = ref(vortex.toString())
+const answer = ref(`function vortex(n, m) {
+  // 创建二维数组，用 0 填充
+  const nums = new Array(n).fill(0).map(() => {
+    return new Array(m).fill(0)
+  })
+
+  let i = 0; // row index
+  let j = 0; // column index
+  let count = 1;
+
+  let stepI = 0; // i 的变化，纵向移动
+  let stepJ = 1; // j 的变化，横向移动
+
+  // 如果下一格的数字不是 0，则表示到达边缘
+  function _hasBlock() {
+    return !nums[i + stepI] || nums[i + stepI][j + stepJ] !== 0;
+  }
+
+  while(1) {
+    nums[i][j] = count++;
+    if (_hasBlock()) {    // 到达边缘
+      if (stepI === 0) {  // 如果是横向移动，则变为纵向移动
+        stepI = stepJ
+        stepJ = 0
+      } else {            // 如果是纵向移动，则变为横向移动
+        stepJ = -stepI
+        stepI = 0
+      }
+
+      // 如果变换移动方向后，依然到达边缘，则表示所有数字都不是 0，则结束
+      if (_hasBlock()) {
+        break;
+      }
+    }
+
+    i += stepI;
+    j += stepJ;
+  }
+
+  return nums;
+}`)
 
 const divRef = ref()
 const list = ref<any[]>([])

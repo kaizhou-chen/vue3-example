@@ -1,38 +1,22 @@
 <template>
-  <p>clip-path 内容裁剪，只有裁剪的区域可见</p>
-  <p>裁剪成圆形，circle：<b>{半径} at 圆心{x y}</b></p>
-
-  <KeyPoint title="跟随鼠标移动" :notes="[
-    {
-      code: `clip-path: circle(80px at 0px 0px);`,
-      desc: '修改圆心的坐标',
-      lang: 'css'
-    },
-    {
-      code: 'clip-path: circle(80px at 20px 30px);',
-      desc: '',
-      lang: 'css'
-    }
-  ]"></KeyPoint>
-
-  <KeyPoint title="滚动切换文字" :notes="[
-    {
-      code: 'clip-path: circle(0px at left center)',
-      desc: '修改圆的半径',
-      lang: 'css'
-    },
-    {
-      code: 'clip-path: circle(500px at left center)',
-      desc: '',
-      lang: 'css'
-    }
-  ]"></KeyPoint>
-
   <div class="container">
     <el-card class="show-case-card">
       <template #header>
         <div>裁剪圆形</div>
       </template>
+
+      <KeyPoint title=" " :notes="[
+        {
+          code: `clip-path: circle(80px at center center);`,
+          desc: ' ',
+          lang: 'css'
+        },
+        {
+          code: '裁剪成圆形，circle：{半径} at 圆心{x y}',
+          desc: '',
+          lang: 'css'
+        }
+      ]"></KeyPoint>
 
       <div class="show-case">
         <div class="sample" :style="{
@@ -59,13 +43,26 @@
       </div>
 
       <p>裁剪区域设置背景，放在顶部，z-index 最大</p>
-      <p>通过 clip-path 控制裁剪内容的大小，达到动画效果</p>
+      <p>通过修改半径大小，达到动画效果</p>
     </el-card>
     
     <el-card>
       <template #header>
         <div>跟随鼠标移动</div>
       </template>
+
+      <KeyPoint title=" " :notes="[
+        {
+          code: `clip-path: circle(80px at 0px 0px);`,
+          desc: '修改圆心的坐标',
+          lang: 'css'
+        },
+        {
+          code: 'clip-path: circle(80px at 20px 30px);',
+          desc: '',
+          lang: 'css'
+        }
+      ]"></KeyPoint>
 
       <div class="container list">
         <div v-for="item of 4" @mousemove="handleMouseMove" class="item" :style="{
@@ -85,8 +82,21 @@
   <Teleport to="body">
     <el-card class="scroll-card">
       <template #header>
-        <div>滚动切换文字</div>
+        <div>滚动切换文字背景</div>
       </template>
+
+      <KeyPoint title=" " :notes="[
+        {
+          code: 'clip-path: circle(0px at left center)',
+          desc: '监听页面滚动，修改圆的半径',
+          lang: 'css'
+        },
+        {
+          code: 'clip-path: circle(500px at left center)',
+          desc: '',
+          lang: 'css'
+        }
+      ]"></KeyPoint>
 
       <div class="section-box">
         <div class="title">Forest</div>
@@ -287,7 +297,7 @@ onBeforeUnmount(() => {
  }
 .section-box {
   position: relative;
-  height: calc(100% - 105px);
+  height: calc(100% - 165px);
   font-weight: bold;
   background-color: #606266;
 }

@@ -21,7 +21,19 @@
 <script setup lang="ts">
 import QuestionLayout from '@/pages/notes/components/QuestionLayout.vue'
 
-const answer = ref(createRequestWithTimeout.toString())
+const answer = ref(`function createRequestWithTimeout(timeout = 5000) {
+  return function(url, options) {
+    return new Promise((resolve, reject) => {
+      // 发送请求
+      fetch(url, options).then(resolve, reject)
+
+      // 添加超时功能
+      setTimeout(() => {
+        reject(new Error('request timeout'))
+      }, timeout)
+    })
+  }
+}`)
 
 function createRequestWithTimeout(timeout = 5000) {
   return function(url, options) {
