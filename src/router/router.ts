@@ -30,27 +30,24 @@ const routes: Array<RouteRecordRaw> = [
           {
             path: 'basic',
             name: 'basicForm',
-            component: () => import('@/pages/form/BasicForm/BasicForm.vue'),
+            component: () => import('@/pages/form/BasicForm/AddMarketing.vue'),
             props: (route) => ({ isDialog: false }),
             meta: { title: '基础表单' }
           },
           {
             path: 'create',
-            name: 'createForm',
-            component: () => import('@/pages/form/BasicForm/BasicForm.vue'),
-            props: (route) => ({ isDialog: false, isUpdate: false }),
+            component: () => import('@/pages/form/BasicForm/AddMarketing.vue'),
+            props: (route) => ({ isDialog: false }),
             meta: { title: '创建活动' }
           },
           {
             path: 'update',
-            name: 'updateForm',
-            component: () => import('@/pages/form/BasicForm/BasicForm.vue'),
-            props: (route) => ({ isDialog: false, isUpdate: true }),
+            component: () => import('@/pages/form/BasicForm/EditMarketing.vue'),
+            props: (route) => ({ isDialog: false }),
             meta: { title: '修改活动' }
           },
           {
             path: 'steps',
-            name: 'stepForm',
             component: () => import('@/pages/form/StepForm/StepForm.vue'),
             meta: { title: '多步骤表单' }
           },
@@ -64,19 +61,16 @@ const routes: Array<RouteRecordRaw> = [
         children: [
           {
             path: 'basic',
-            name: 'basicTable',
             component: () => import('@/pages/table/BasicTable.vue'),
             meta: { title: '基础表格', plain: true }
           },
           {
             path: 'pinia',
-            name: 'piniaTable',
             component: () => import('@/pages/table/PiniaTable/PiniaTable.vue'),
             meta: { title: '表格 + pinia', plain: true }
           },
           {
             path: 'editable',
-            name: 'editableTable',
             component: () => import('@/pages/table/EditableTable/EditableTable.vue'),
             meta: { title: '可编辑表格' }
           },
@@ -89,15 +83,10 @@ const routes: Array<RouteRecordRaw> = [
         meta: { title: '详情页' },
         children: [
           {
-            path: 'basic',
+            path: ':id/basic', // 占位符 :id
             name: 'basicDetail',
             component: () => import('@/pages/detail/BasicDetail.vue'),
             meta: { title: '基础详情' }
-          },
-          {
-            path: 'tree',
-            component: () => import('@/pages/detail/Tree.vue'),
-            meta: { title: '树形控件', plain: true }
           },
           {
             path: 'context-menu',
@@ -145,7 +134,6 @@ const routes: Array<RouteRecordRaw> = [
     children: [
       {
         path: '',
-        name: '404',
         component: () => import('@/pages/NotFound.vue'),
         meta: { plain: true },
       }
@@ -154,7 +142,7 @@ const routes: Array<RouteRecordRaw> = [
   // 所有未定义的路径都将匹配 * 这个路由定义，然后重定向到 404
   {
     path: '/:pathMatch(.*)*',
-    redirect: { name: '404' },
+    redirect: { path: '/404' },
   }
 ]
 

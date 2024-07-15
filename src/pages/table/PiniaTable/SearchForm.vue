@@ -11,6 +11,10 @@ const collapseForm = ref(true)
 
 function resetForm(formEl) {
   formEl.resetFields();
+  
+  form.value.jit = [];
+  form.value.region = [];
+
   getTableData()
 }
 </script>

@@ -13,7 +13,7 @@ const menuList = [
     children: [
       {
         text: '基础表单',
-        url: '/form/basic'
+        url: '/form/create'
       },
       {
         text: '多步骤表单',

@@ -11,28 +11,20 @@ function handleInput(val) {
 </script>
 
 <template>
-  <div class="container">
-    <el-card>
-      <template #header>
-        <div>RGB 与 HEX 颜色互相转换</div>
-      </template>
+  <el-card style="width: 425px;">
+    <template #header>
+      <div>RGB 与 HEX 颜色互相转换</div>
+    </template>
 
-      <el-input v-model="color" :placeholder="placeholder" @input="handleInput"></el-input>
-      <div class="color-result">
-        <div class="preview-color" :style="{'background-color': result}"></div>
-        <div>{{ result }}</div>
-      </div>
-    </el-card>
-  </div>
+    <el-input v-model="color" :placeholder="placeholder" @input="handleInput"></el-input>
+    <div class="color-result">
+      <div class="preview-color" :style="{'background-color': result}"></div>
+      <div>{{ result }}</div>
+    </div>
+  </el-card>
 </template>
 
 <style lang="less" scoped>
-.container {
-  display: grid;
-  grid-gap: 12px;
-  grid-template-columns: repeat(2, 1fr);
-}
-
 .color-result {
   display: flex; 
   align-items: center; 

@@ -22,9 +22,9 @@ const fileList1 = ref<Array<any>>([])
 const fileList2 = ref<Array<any>>([])
 
 onMounted(async () => {
-  const resp = await listFiles({});
-  const files = resp.data.data;
-  const list: any = files.map((x) => {
+  const resp: any = await listFiles({});
+  let { list } = resp.data;
+  list = list.map((x) => {
     return {
       name: x,
       url: downloadUrl.value + '/' + x
@@ -63,7 +63,7 @@ function onChange(file, fileList?) {
   const maxSize = 10; // 10M
   const acceptTypes = accept.value.split(',');
   const type = file.name.substring(file.name.lastIndexOf('.'));
-  const isAccept = acceptTypes.indexOf(type) > -1;
+  const isAccept = acceptTypes.indexOf(type.toLowerCase()) > -1;
   const isOversize = (file.size / 1024 / 1024) > maxSize
   if (!isAccept) {
     const msg = accept.value.replace(/\./g, '').replace(',', ', ')

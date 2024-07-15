@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import CookbookLayout from '@/pages/notes/components/CookbookLayout.vue'
+import { addMenuItem } from '@/utils/menuUtil'
 import MenuItem from './MenuItem'
 
 const tableData = ref([
@@ -120,33 +121,13 @@ const menu = ref<Array<MenuItem>>([
         label: 'Less 语法',
         value: 'Less'
       },
-      /*
-      {
-        label: 'CSS 笔记',
-        value: 'CssNote'
-      },
-      {
-        label: '相对单位 em/rem',
-        value: 'RelativeUnit'
-      },
-      */
     ]
   },
-  {
-    label: '其他',
-    value: 'other',
-    children: [
-      {
-        label: '悬浮抽卡',
-        value: 'GachaGame'
-      },
-      {
-        label: '颜色转换',
-        value: 'ColorTools'
-      },
-    ]
-  }
 ])
+
+onMounted(() => {
+  addMenuItem(menu.value, 'css-cookbook')
+})
 </script>
 
 <style lang="less" scoped>

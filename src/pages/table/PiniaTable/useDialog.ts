@@ -16,9 +16,10 @@ export function useDialog() {
   function gotoCreate() {
     if (dgType.value === 1) {
       // 跳转到创建页面
-      router.push({name: 'createForm'})
+      router.push({ path: '/form/create' })
     } else {
       // 打开创建弹出框
+      dgTitle.value = '新建活动'
       isUpdate.value = false;
       dgOpen.value = true;
     }
@@ -29,11 +30,12 @@ export function useDialog() {
 
     if (dgType.value === 1) {
       // 跳转到编辑页面
-      router.push({name: 'updateForm'}).then(() => {
+      router.push({ path: '/form/update' }).then(() => {
         bus.emit('updateUser', val) // 路由不能传递对象，使用EventBus，在页面跳转后发送消息
       })
     } else {
       // 打开编辑弹出框
+      dgTitle.value = '编辑活动'
       isUpdate.value = true;
       dgOpen.value = true;
 
@@ -45,7 +47,12 @@ export function useDialog() {
   function viewDetail(data) {
     const val = JSON.parse(JSON.stringify(data));
 
-    router.push({name: 'basicDetail'}).then(() => {
+    router.push({ 
+      name: 'basicDetail', 
+      params: {
+        id: data.id
+      } 
+    }).then(() => {
       bus.emit('viewUser', val) // 路由不能传递对象，使用EventBus，在页面跳转后发送消息
     })
   }
