@@ -1,0 +1,1 @@
+import{_ as o}from"./BasicDetail.vuevuetypescriptsetuptruelang.CwYcWX-s.2024-07-15_03.43.55.js";import"./dateUtils.B9q3C6W0.2024-07-15_03.43.55.js";import"./index.ZB1ftQx1.2024-07-15_03.43.55.js";import"./bus.CdlF-dbX.2024-07-15_03.43.55.js";import"./main.Cxf_rs01.2024-07-15_03.43.55.js";export{o as default};
