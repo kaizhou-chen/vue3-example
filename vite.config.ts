@@ -2,6 +2,7 @@ import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path, { resolve } from "path";
 import fs from 'fs';
+import dayjs from 'dayjs'
 
 import AutoImport from 'unplugin-auto-import/vite'
 import monacoEditorPluginModule from 'vite-plugin-monaco-editor'
@@ -18,6 +19,8 @@ const monacoEditorPlugin = isObjectWithDefaultFunction(monacoEditorPluginModule)
 
 const INVALID_CHAR_REGEX = /[\u0000-\u001F"#$&*+,:;<=>?[\]^`{|}\u007F]/g;
 const DRIVE_LETTER_REGEX = /^[a-z]:/i;
+
+const timestamp = dayjs(new Date()).format('YYYY-MM-DD_HH.mm.ss')
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -72,16 +75,24 @@ export default defineConfig(({ mode }) => {
       },
     },
 
-    // 打包时，将多个入口，分开打包
+    // 打包
     build: {
       rollupOptions: {
+        // 打包时，将多个入口，分开打包
         input: {
           main: resolve(__dirname, 'index.html'),
           login: resolve(__dirname, 'login.html')
         },
-
-        // 解决问题：部署到github后，_plugin-vue_export-helper.js 访问不到
+        
         output: {
+          // 问题 1：由于浏览器的缓存机制，每次部署后，都要强制刷新
+          // 解决方法：给文件添加时间戳，每次部署后，都是新文件，需要重新下载
+          entryFileNames: `assets/[name].[hash].${timestamp}.js`,
+          chunkFileNames: `assets/[name].[hash].${timestamp}.js`,
+          assetFileNames: `assets/[name].[hash].${timestamp}.[ext]`,
+
+
+          // 问题 2：部署到github后，_plugin-vue_export-helper.js 访问不到
           // https://github.com/rollup/rollup/blob/master/src/utils/sanitizeFileName.ts
           sanitizeFileName(name) {
             const match = DRIVE_LETTER_REGEX.exec(name);
