@@ -27,8 +27,8 @@ const loading = ref(false)
 const options: any = ref()
 
 const list1 = [
-  { 'label': 'abc123456 张三 （部门一）', value: 'abc123456' },
-  { 'label': 'abc345678 李四 （部门二）', value: 'abc345678' },
+  { label: 'abc123456 张三 （部门一）', value: 'abc123456' },
+  { label: 'abc345678 李四 （部门二）', value: 'abc345678' },
 ]
 
 const list2 = [

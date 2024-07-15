@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "build-only": "vite build --mode production",
     "type-check": "vue-tsc --build --force",
+    
     "build:github": "run-p type-check \"build-deploy {@}\" --",
     "build-deploy": "vite build --mode production -- --deploy"
   },

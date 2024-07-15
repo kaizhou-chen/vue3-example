@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import TreeLayout from '@/layout/TreeLayout.vue'
+import DynamicComponent from '@/components/DynamicComponent.vue'
 
 const props = withDefaults(defineProps<{
   menu: Array<any>,
@@ -9,31 +10,6 @@ const props = withDefaults(defineProps<{
 
 const layoutRef = ref()
 const activeNode = ref()
-
-const componentName = computed(() => {
-  const node = activeNode.value;
-  if (!node) {
-    return
-  }
-  
-  // 动态加载组件
-  return loadComponent(node.value)
-})
-
-// 动态加载组件
-const modules = import.meta.glob('@/pages/notes/**/*.vue');
-
-function loadComponent(name){
-  const keys = Object.keys(modules)
-  const path = keys.find(x => x.indexOf(name + '.vue') >= 0)
-
-  if (path) {
-    // @ts-ignore
-    return defineAsyncComponent(modules[path])
-  } else {
-    return name
-  }
-}
 
 function handleTabChange(node) {
   activeNode.value = node
@@ -95,7 +71,7 @@ onMounted(() => {
 
     <!-- tab 里展示的组件-->
     <div>
-      <component v-if="componentName" :is="componentName"></component>
+      <DynamicComponent v-if="activeNode" :name="activeNode.value"></DynamicComponent>
       <div v-else>
         <slot></slot>
       </div>

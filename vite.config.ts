@@ -64,7 +64,7 @@ export default defineConfig(({ mode }) => {
     },
 
     // 项目的 base
-    base: env.VITE_BASE_PATH === '/' ? './' : env.VITE_BASE_PATH,
+    base: env.VITE_BASE_PATH,
 
     // LESS
     css: {
