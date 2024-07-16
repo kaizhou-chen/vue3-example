@@ -4,6 +4,7 @@ import path, { resolve } from "path";
 import fs from 'fs';
 
 import AutoImport from 'unplugin-auto-import/vite'
+import { visualizer } from 'rollup-plugin-visualizer'
 import monacoEditorPluginModule from 'vite-plugin-monaco-editor'
 import dayjs from 'dayjs'
 
@@ -31,6 +32,14 @@ export default defineConfig(({ mode }) => {
         languageWorkers: ['editorWorkerService', 'typescript', 'json', 'html']
       }),
 
+      // 打包视图分析
+      visualizer({
+        open: true,
+        emitFile: false,
+        filename: 'stats.html',
+        sourcemap: false,
+      }),
+
       // 自定义插件
       githubPlugin()
     ],
@@ -56,6 +65,7 @@ export default defineConfig(({ mode }) => {
 
     // 打包
     build: {
+      sourcemap: false,
       rollupOptions: {
         // 打包时，将多个入口，分开打包
         input: {

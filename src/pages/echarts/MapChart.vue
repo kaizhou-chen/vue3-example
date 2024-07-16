@@ -6,9 +6,6 @@
 
 <script setup lang="ts">
 import Chart from './chart/Chart.vue';
-
-// 导入世界地图数据，及国家名称的中英文映射
-import worldData from '@/assets/world.json'
 import nameMap from './chart/nameMap'
 
 const option = ref();
@@ -24,7 +21,12 @@ onMounted(() => {
   })
 })
 
-function registerMap(echarts) {
+async function registerMap(echarts) {
+  // 导入世界地图数据，及国家名称的中英文映射
+  const url = import.meta.env.VITE_BASE_PATH + 'world.json';
+  const response = await fetch(url);
+  const worldData = await response.json();
+
   echarts.registerMap('world', (<any> worldData)); // 要注册地图
 }
 
