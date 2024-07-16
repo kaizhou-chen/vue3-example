@@ -28,16 +28,11 @@
     "paths": { 
       "@/*": ["src/*"] 
     },
-
-    "types": ["vite/client"]
   },
   "include": [
     "src/**/*.ts", 
     "src/**/*.tsx", 
     "src/**/*.vue", 
-
-    // 自动导入
-    "./auto-imports.d.ts"
   ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

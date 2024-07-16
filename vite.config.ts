@@ -23,6 +23,7 @@ export default defineConfig(({ mode }) => {
       // 自动导入
       AutoImport({
         imports: [ 'vue', 'vue-router', 'pinia' ],
+        dts: 'src/auto-import.d.ts',
       }),
 
       // Monaco Editor 配置
