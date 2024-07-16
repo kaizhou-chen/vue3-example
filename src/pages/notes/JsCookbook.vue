@@ -67,6 +67,17 @@ const menu = ref<Array<MenuItem>>([
             value: 'FetchWithTimeout'
           },
         ]
+      },
+
+      {
+        label: 'svg',
+        value: 'svg',
+        children: [
+          {
+            label: '规则引擎',
+            value: 'RuleEngine'
+          },
+        ]
       }
     ]
   },

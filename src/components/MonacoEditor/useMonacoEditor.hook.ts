@@ -14,7 +14,7 @@ export function useMonacoEditor(language: string = 'javascript') {
       // 初始模型
       model: monaco.editor.createModel('', language),
       // 是否启用预览图
-      minimap: { enabled: true },
+      minimap: { enabled: false },
       // 圆角
       roundedSelection: true,
       // 主题

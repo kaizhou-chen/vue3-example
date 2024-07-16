@@ -166,5 +166,5 @@ function getLinks(dataset, nodes) {
   }
 
   return links;
-};
+}
 </script>

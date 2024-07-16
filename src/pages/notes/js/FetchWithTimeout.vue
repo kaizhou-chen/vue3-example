@@ -11,7 +11,7 @@
       <li>
         <p><b>Promise 的状态一旦确定，就不会再修改</b></p>
         <p>fetch 正常执行然后 resolve，<b> 状态已确定 </b>，到达超时时间调用 reject，被忽略</p>
-        <p>请求超时调用 reject，<b> 状态已经确定 </b>，当 fetch 请求结束调用 resolve，被忽略</p>
+        <p>请求超时然后 reject，<b> 状态已经确定 </b>，当 fetch 请求结束调用 resolve，被忽略</p>
         <p>所以，Promise 的状态和结果不受影响</p>
       </li>
     </ul>

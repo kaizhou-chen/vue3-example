@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@svgdotjs/svg.js": "^3.2.4",
     "axios": "^1.6.8",
     "dayjs": "^1.11.11",
     "echarts": "^5.5.0",
