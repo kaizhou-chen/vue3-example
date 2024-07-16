@@ -76,3 +76,31 @@ export function checkParent(child, parentClass: string | Array<string>) {
 
   return false;
 }
+
+/**
+ * element 根节点
+ * value 要匹配的值
+ * field 要查找的字段
+ */
+function searchTree(element, value, field) {
+  if (element[field || 'id'] == value) {
+    return element;
+  } else if (element.children != null) {
+    let result = null;
+    for(let i = 0; result == null && i < element.children.length; i++) {
+      result = searchTree(element.children[i], value, field);
+    }
+    return result;
+  }
+  return null;
+}
+
+export function searchTreeList(list, value, field?) {
+  for (const item of list) {
+    let result = searchTree(item, value, field);
+    if (result) {
+      return result
+    }
+  }
+  return null;
+}
