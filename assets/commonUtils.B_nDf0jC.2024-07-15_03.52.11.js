@@ -1,1 +1,0 @@
-const r="/vue3-example/";function g(e){return e.indexOf("/")==0&&(e=e.substring(1)),r+e}const s=e=>parseInt(e,16),u=e=>`0${e.toString(16)}`.slice(-2).toUpperCase(),i=e=>e.match(/\d+/g).reduce((n,t)=>n+u(Number(t)),"#"),c=e=>"rgb("+e.match(/([\da-f]{2})/gi).map(s).join(", ")+")";function a(e){return e.includes("#")?c(e):e.includes(",")?i(e):"unknown input value"}export{a as c,g};
