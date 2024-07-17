@@ -9,7 +9,7 @@ import monacoEditorPluginModule from 'vite-plugin-monaco-editor'
 import dayjs from 'dayjs'
 
 const monacoEditorPlugin = getMonacoEditorPlugin();
-const timestamp = dayjs(new Date()).format('YYYY-MM-DD_HH.mm.ss')
+const timestamp = dayjs(new Date()).format('YYYY-MM-DD_HHmm')
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -29,7 +29,10 @@ export default defineConfig(({ mode }) => {
 
       // Monaco Editor 配置
       monacoEditorPlugin({
-        languageWorkers: ['editorWorkerService', 'typescript', 'json', 'html']
+        languageWorkers: ['editorWorkerService', 'typescript', 'json', 'html'],
+        customDistPath: (root: string, buildOutDir: string, base: string) => {
+          return buildOutDir + path.sep + 'monacoeditorwork'
+        }
       }),
 
       // 打包视图分析
@@ -81,6 +84,13 @@ export default defineConfig(({ mode }) => {
 
           // 处理文件名里的特殊符号
           sanitizeFileName,
+
+          // 拆分包
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              return id.toString().split("node_modules/")[1].split("/")[0].toString();
+            }
+          }
         },
       }
     },

@@ -8,6 +8,8 @@
 import Chart from './chart/Chart.vue';
 import nameMap from './chart/nameMap'
 
+import http from '@/utils/http'; // 导入http中创建的axios实例
+
 const option = ref();
 
 const loading = ref(true)
@@ -24,8 +26,8 @@ onMounted(() => {
 async function registerMap(echarts) {
   // 导入世界地图数据，及国家名称的中英文映射
   const url = import.meta.env.VITE_BASE_PATH + 'world.json';
-  const response = await fetch(url);
-  const worldData = await response.json();
+  const resp = await http.get(url)
+  const worldData = resp.data
 
   echarts.registerMap('world', (<any> worldData)); // 要注册地图
 }
