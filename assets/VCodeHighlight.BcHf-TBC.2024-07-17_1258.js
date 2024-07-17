@@ -1,0 +1,1 @@
+import{H as r}from"./highlight.js.D0d1Vxwy.2024-07-17_1258.js";const n={beforeMount(t,o){let g=t.querySelectorAll("pre code");const i=l=>{g.forEach(e=>{l!=null&&(e.innerHTML=l,delete e.dataset.highlighted),r.highlightElement(e)})};i();const h=o.value;h&&h(i)}};export{n as v};
