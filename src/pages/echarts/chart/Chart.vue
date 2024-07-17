@@ -45,7 +45,7 @@ function dispose() {
   }
 }
 
-function renderChart(option) {
+async function renderChart(option) {
   if (!option) {
     return;
   }
@@ -54,7 +54,7 @@ function renderChart(option) {
   chart = echarts.init(chartEl.value);
   // 如果是地图，需要注册地图
   if (props.registerMap) {
-    props.registerMap(echarts)
+    await props.registerMap(echarts)
   }
   chart.clear();
   chart.setOption(option);

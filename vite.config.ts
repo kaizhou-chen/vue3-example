@@ -4,11 +4,12 @@ import path, { resolve } from "path";
 import fs from 'fs';
 
 import AutoImport from 'unplugin-auto-import/vite'
+import { visualizer } from 'rollup-plugin-visualizer'
 import monacoEditorPluginModule from 'vite-plugin-monaco-editor'
 import dayjs from 'dayjs'
 
 const monacoEditorPlugin = getMonacoEditorPlugin();
-const timestamp = dayjs(new Date()).format('YYYY-MM-DD_HH.mm.ss')
+const timestamp = dayjs(new Date()).format('YYYY-MM-DD_HHmm')
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -23,11 +24,23 @@ export default defineConfig(({ mode }) => {
       // 自动导入
       AutoImport({
         imports: [ 'vue', 'vue-router', 'pinia' ],
+        dts: 'src/auto-import.d.ts',
       }),
 
       // Monaco Editor 配置
       monacoEditorPlugin({
-        languageWorkers: ['editorWorkerService', 'typescript', 'json', 'html']
+        languageWorkers: ['editorWorkerService', 'typescript', 'json', 'html'],
+        customDistPath: (root: string, buildOutDir: string, base: string) => {
+          return buildOutDir + path.sep + 'monacoeditorwork'
+        }
+      }),
+
+      // 打包视图分析
+      visualizer({
+        open: true,
+        emitFile: false,
+        filename: 'stats.html',
+        sourcemap: false,
       }),
 
       // 自定义插件
@@ -55,6 +68,7 @@ export default defineConfig(({ mode }) => {
 
     // 打包
     build: {
+      sourcemap: false,
       rollupOptions: {
         // 打包时，将多个入口，分开打包
         input: {
@@ -70,6 +84,13 @@ export default defineConfig(({ mode }) => {
 
           // 处理文件名里的特殊符号
           sanitizeFileName,
+
+          // 拆分包
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              return id.toString().split("node_modules/")[1].split("/")[0].toString();
+            }
+          }
         },
       }
     },
