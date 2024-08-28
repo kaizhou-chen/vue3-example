@@ -26,10 +26,12 @@ const menuList = [
     text: '表格页',
     icon: 'Grid',
     children: [
+      /*
       {
         text: '基础表格',
         url: '/table/basic',
       },
+      */
       {
         text: '表格 + pinia',
         url: '/table/pinia',

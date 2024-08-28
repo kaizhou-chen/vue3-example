@@ -51,23 +51,6 @@ function gotoBlog() {
             <layout-breadcrumb></layout-breadcrumb>
           </el-header>
         </el-container>
-
-        <div style="align-self: center;">
-          <el-link href="https://github.com/kaizhou-chen/vue3-example" target="_blank">
-            <span style="padding-right: 5px;">Github</span>
-            <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="1.2em" height="1.2em" class="link-icon">
-              <path fill="currentColor" d="M10 6v2H5v11h11v-5h2v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6zm11-3v8h-2V6.413l-7.793 7.794l-1.414-1.414L17.585 5H13V3h8z"></path>
-            </svg>
-          </el-link>
-
-          <el-link href="https://kaizhou-chen.github.io/docsify-blog/" target="_blank" style="margin-left: 18px;">
-            <span style="padding-right: 5px;">我的博客</span>
-            <svg preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" width="1.2em" height="1.2em" class="link-icon">
-              <path fill="currentColor" d="M10 6v2H5v11h11v-5h2v6a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h6zm11-3v8h-2V6.413l-7.793 7.794l-1.414-1.414L17.585 5H13V3h8z"></path>
-            </svg>
-          </el-link>
-        </div>
-
       </div>
     </el-header>
 
